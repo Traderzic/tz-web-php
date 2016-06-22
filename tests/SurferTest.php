@@ -1,7 +1,7 @@
 <?php
-require_once 'Database.php';
-require_once 'DAOsurfer.php';
-require_once 'Surfer.php';
+require_once './models/Database.php';
+require_once './models/DAOsurfer.php';
+require_once './models/Surfer.php';
 use PHPUnit\Framework\TestCase;
 
 class SurferTest extends PHPUnit_Framework_TestCase{
