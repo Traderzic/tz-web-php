@@ -9,6 +9,35 @@ class ProjectDAOTest extends PHPUnit_Framework_TestCase	{
 		$test = $object::getList();
 		$this->assertEquals(0,count($test));
 	}
+	
+	public function testGetEmptyPalmares()	{
+		$object = new ProjectDAO();
+		$test = $object::getPalmaresList();
+		$this->assertEquals(0,count($test));
+	}
+	
+	public function testNoProjectOnGoing()	{
+		$object = new ProjectDAO();
+		$test = $object::getProjectOnGoingList();
+		$this->assertEquals(0,count($test));
+	}
+	
+	public function testCreateProject()	{
+		$name = "simon";
+		$startDate = 2014;
+		$description = "descr";
+		$endDate = 2017;
+		$rate = 4;
+		$status = true;
+		
+		$object = new ProjectDAO();
+		$test = $object::create($name,$startDate,$description,$endDate,$rate,$status);
+		
+		$before = count($object::getList());
+		$this->assertGreaterThan($before,$test);
+	}
+	
+
 }	
 
 ?>
