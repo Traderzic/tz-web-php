@@ -1,27 +1,28 @@
 <?php
 include "ProjectDAO.php";
-class ProjectClass /*extends Model*/ {
+class abstract ProjectClass /*extends Model*/ {
 	
-	private $name,$startDate,$description,$endDate,$rate,$Status;
+	private $mail,$name,$startDate,$description,$endDate,$stats,$classe,$support,$type,$day,$location;
 
-	function __construct ($name,$startDate,$description,$endDate,$rate,$status){
+	function __construct ($mail,$name,$startDate,$description,$endDate,$stats,$classe,$support,$type,$day,$location){
+		$this->mail=$mail;
 		$this->name=$name;
 		$this->startDate=$startDate;
 		$this->description=$description;
 		$this->endDate=$endDate;
-		$this->rate=$rate;
-		$this->status=$status;
+		$this->stats=$stats;
+		$this->classe=$classe;
+		$this->support=$support;
+		$this->type=$type;
+		$this->day=$day;
+		$this->location=$location;
 	}
-	public function __toString(){
-		echo "<table>";
-		echo "<tr><td>Name</td><td>".$this->name."</td></tr>";
-		echo "<tr><td>starDate</td><td>".$this->startDate."</td></tr>";
-		echo "<tr><td>description</td><td>".$this->description."</td></tr>";
-		echo "<tr><td>endDate</td><td>".$this->endDate."</td></tr>";
-		echo "<tr><td>rate</td><td>".$this->rate."</td></tr>";
-		echo "<tr><td>status</td><td>".$this->status."</td></tr>";
-		return "</table>";;
-  }
+	public function getMail(){
+		return $this->mail;
+	}
+	public function setMail($new){
+		$this->mail=$new;
+	}
 	public function getName(){
 		return $this->name;
 	}
@@ -46,17 +47,35 @@ class ProjectClass /*extends Model*/ {
 	public function setEndDate($new){
 		$this->endDate=$new;
 	}
-	public function getRate(){
-		return $this->rate;
-	}
-	public function setRate($new){
-		$this->rate=$new;
-	}
 	public function getStatus(){
 		return $this->status;
 	}
 	public function setStatus($new){
 		$this->status=$new;
+	}
+	public function getSupport(){
+		return $this->support;
+	}
+	public function setSupport($new){
+		$this->support=$new;
+	}
+	public function getType(){
+		return $this->type;
+	}
+	public function setType($new){
+		$this->type=$new;
+	}
+	public function getDay(){
+		return $this->day;
+	}
+	public function setDay($new){
+		$this->day=$new;
+	}
+	public function getLocation(){
+		return $this->location;
+	}
+	public function setLocation($new){
+		$this->location=$new;
 	}
 }
 
