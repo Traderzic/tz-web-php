@@ -80,7 +80,7 @@ class PartDAO {
 		
 	}
 	
-	public function deletePart($part) {
+	public static function deletePart($part) {
 		$db = Database::getInstance();
 		$sql = "DELETE FROM WHERE idPart =:idPart";
 		$stmt = $db->prepare($sql);
