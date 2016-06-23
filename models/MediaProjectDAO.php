@@ -45,14 +45,14 @@ class MediaProjectDAO extends ProjectDAO{
 		return $stmt->fetch();
 	}
 	public static function getMediaList(){
-		$sql = "SELECT * FROM Project";
+		$sql = "SELECT * FROM Project where classe = 'mediaProject'";
 		$db=Database::getInstance();
 		$stmt = $db->query($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
 		return $stmt->fetchAll();
 	}
 	public static function getMediaProjectOnGoingList(){
-		$sql = "SELECT * FROM Project where status=false and classe = 'mediaProject'";
+		$sql = "SELECT * FROM Project where status != 'aborted' and status != 'achievement' and classe = 'mediaProject'";
 		$db=Database::getInstance();
 		$stmt = $db->query($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
