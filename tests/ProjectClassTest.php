@@ -1,11 +1,11 @@
 <?php 
 
-require_once('../models/ProjectClass.php');
-require_once('../models/ProjectDAO.php');
+require_once('./models/ProjectClass.php');
+require_once('./models/ProjectDAO.php');
 use PHPUnit\Framework\TestCase;
 
 class ProjectClassTest extends PHPUnit_Framework_TestCase	{
-	public $mail = "adr@test.com"
+	public $mail = "adr@test.com";
 	public $name = "simon";
 	public $startDate = 2016;
 	public $description = "descr";
