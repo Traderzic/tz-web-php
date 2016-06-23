@@ -21,24 +21,27 @@ class TestPart extends PHPUnit_Framework_TestCase {
   }
   
   public function testCreatePart() {
-    $part=new part(1,11,4,120,'2016-06-16');
+    $part=new PartClass(1,"zozo@hotmail.fr",4,120,'2016-06-16');
     $id = PartDAO::createPart($part);
     $this->assertInternalType("int",$id);
   }
   
-  public function testUpdatePriceFromIdPart() {
-    $count = PartDAO::updatePriceFromIdPart(1,1);
-    $this->assertGreaterThanOrEquals(1,$count);
+  public function testUpdatePart() {
+    $part = new PartClass(1,"zozo@hotmail.fr",4,110,'2016-06-16');
+    $newPart = PartDAO::updatePart($part);
+    
+    $this->assertEquals($part->getIdPart(),$newPart->getIdPart());
+    $this->assertEquals($part->getMailInvestor(),$newPart->getMailInvestor());
+    $this->assertEquals($part->getIdProject(),$newPart->getIdProject());
+    $this->assertEquals($part->getPrice(),$newPart->getPrice());
+    $this->assertEquals($part->getDate(),$newPart->getDate());
   }
   
-  public function testDeletePartFromIdPart() {
-    $count = PartDAO::deletePartFromIdPart(1);
-    $this->assertGreaterThanOrEquals(1,$count);
+  public function testDeletePart() {
+    $part = new PartClass(1,"zozo@hotmail.fr",4,110,'2016-06-16');
+    $count = PartDAO::deletePart($part);
+    $this->assertEquals(1,$count);
   }
   
-  public function testDeletePartFromIdProject() {
-    $count = PartDAO::deletePartFromIdProject(1);
-    $this->assertGreaterThanOrEquals(1,$count);
-  }
   
 ?>
