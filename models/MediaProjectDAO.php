@@ -12,7 +12,7 @@ class MediaProjectDAO extends ProjectDAO{
 			":startDate"=>$project->getStartDate(),
 			":description"=>$project->getDescription(),
      	":endDate"=>$project->getEndDate(),
-			":classe"=>$project->$classe,									 
+			":classe"=>'mediaProject',									 
       ":support"=>$support,
 			":mail"=>$mail,
 			":status"=>'conception',
