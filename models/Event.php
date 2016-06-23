@@ -1,25 +1,26 @@
 <?php
 include "EventDAO.php";
-public class Event extends Project{
+class Event extends ProjectClass{
+  private $day;
   private $location;
-  private $dateTime;
 
-  public function __construct($location, $dateTime){
-    $this->location = $location;
-    $this->dateTime = $dateTime;
+  public function __construct($mail,$name,$startDate,$description,$endDate,$day,$location){
+    $support = null;
+    $type = null;
+    parent::_construct($mail,$name,$startDate,$description,$endDate,'conception','event',$support,$type,$day,$location);
   }
 
   public function getLocation(){
     return $this->location;
   }
-  public function getDateTime(){
-    return $this->dateTime;
+  public function getDay(){
+    return $this->day;
   }
   public function setLocation($location){
     return $this->location = $location;
   }
-  public function setdateTime(){
-    return $this->dateTime = $dateTime;
+  public function setDay(){
+    return $this->day = $day;
   }
 }
 ?>

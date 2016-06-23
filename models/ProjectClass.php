@@ -47,11 +47,11 @@ class abstract ProjectClass /*extends Model*/ {
 	public function setEndDate($new){
 		$this->endDate=$new;
 	}
-	public function getStatus(){
-		return $this->status;
+	public function getStats(){
+		return $this->stats;
 	}
-	public function setStatus($new){
-		$this->status=$new;
+	public function setStats($new){
+		$this->stats=$new;
 	}
 	public function getSupport(){
 		return $this->support;
@@ -78,15 +78,4 @@ class abstract ProjectClass /*extends Model*/ {
 		$this->location=$new;
 	}
 }
-
-/*$projet=new ProjectClass("Lui","1990-01-01","il","1990-01-01",5,true);
-echo $projet->getName();
-echo $projet->getRate();
-echo ProjectDAO::Create($projet);
-$list=ProjectDAO::getList();
-foreach($list as $test):
-	echo "<br>".$test['name'];
-endforeach;
-ProjectDAO::changeStatus(30,true);  
-echo $projet; Données test*/
 ?>
