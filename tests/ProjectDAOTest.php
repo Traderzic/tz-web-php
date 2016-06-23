@@ -27,13 +27,15 @@ class ProjectDAOTest extends PHPUnit_Framework_TestCase	{
 		$startDate = 2014;
 		$description = "descr";
 		$endDate = 2017;
-		$rate = 4;
+		$rate = null;
 		$status = "conception";
 		
 		$object = new ProjectDAO();
 		
+		$project = new Project($name,$startDate,$description,$endDate,$rate,$status);
+		
 		$before = count($object::getList());
-		$test = $object::create($name,$startDate,$description,$endDate,$rate,$status);
+		$test = $object::create($project);
 		
 		$this->assertGreaterThan($before,$test);
 	}
