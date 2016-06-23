@@ -13,7 +13,9 @@ class MediaProject extends ProjectClass{
   public function __construct($name,$startDate,$description,$endDate,$support,$type,$mail){
     $day = null;
     $location = null;
-    parent::_construct($mail,$name,$startDate,$description,$endDate,$stats,'mediaProject',$support,$type,$day,$location);
+    if(in_array($support,$this->differentSupports) && in_array($type,$differentTypes)){
+      parent::_construct($mail,$name,$startDate,$description,$endDate,'conception','mediaProject',$support,$type,$day,$location);
+    }
   }
   
 //Support methods  
