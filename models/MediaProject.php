@@ -10,10 +10,8 @@ class MediaProject extends ProjectClass{
   private var $differentTypes = array('video','son');
   private var $differentSupports = array('numeric','cd','dvd');
   
-  public function __construct($name,$startDate,$description,$endDate,$support,$type){
-    parent::_construct($name,$startDate,$description,$endDate,$rate,$stats,$classe);
-    $this->setSupport($support);
-    $this->setType($type);
+  public function __construct($name,$startDate,$description,$endDate,$support,$type,$mail){
+    parent::_construct($mail,$name,$startDate,$description,$endDate,$stats,$classe,$support,$type);
   }
   
 //Support methods  
