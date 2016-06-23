@@ -11,7 +11,7 @@ class MediaProject extends ProjectClass{
   private var $differentSupports = array('numeric','cd','dvd');
   
   public function __construct($name,$startDate,$description,$endDate,$support,$type,$mail){
-    parent::_construct($mail,$name,$startDate,$description,$endDate,$stats,$classe,$support,$type);
+    parent::_construct($mail,$name,$startDate,$description,$endDate,$stats,'mediaProject',$support,$type);
   }
   
 //Support methods  
