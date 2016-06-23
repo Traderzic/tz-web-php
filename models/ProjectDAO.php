@@ -1,20 +1,6 @@
 <?php
 include "Database.php";
-/* abstract */class ProjectDAO {
-	public static function create($project){ 
-		$sql = "INSERT INTO Project(name,startDate,description,endDate,rate,stats,classe) values(:name,:startDate,:description,:endDate,:rate,:status,:classe)";
-		$db=Database::getInstance(); // Recupere la base de données.
-		$stmt = $db->prepare($sql);
-		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
-	  $stmt->execute(array(":name" => $project->getName(),
-			":startDate"=>$project->getStartDate(),
-			":description"=>$project->getDescription(),
-     	":endDate"=>$project->getEndDate(),
-			":rate"=>$project->getRate(),
-			":classe"=>$project->getClasse(),
-			":status"=>$project->getStatus()));
-	  	return $db->lastInsertId();
-	}
+abstract class ProjectDAO {
 	public static function getFromId( $id ){
 		$sql = "SELECT * FROM Project WHERE idProject=:id";
 		$db=Database::getInstance();
@@ -22,8 +8,7 @@ include "Database.php";
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
 		$stmt->execute(array(":idProject" => $id));
 		$res=$stmt->fetch();
-		$obj=ProjectClass::new Project($res['name'],$res['startDate'],$res['description'],$res['endDate'],$res['stats'],$res['classe']);
-		return $obj;
+		return $res;
 	}
 	public static function getFromName( $name ){
 		$sql = "SELECT * FROM Project WHERE name=:name";
@@ -48,7 +33,7 @@ include "Database.php";
 		return $stmt->fetchAll();
 	}
 	public static function getProjectOnGoingList(){
-		$sql = "SELECT * FROM Project where status=false";
+		$sql = "SELECT * FROM Project where status != done and status != aborted";
 		$db=Database::getInstance();
 		$stmt = $db->query($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
