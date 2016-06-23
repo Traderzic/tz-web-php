@@ -28,7 +28,7 @@ class ProjectDAOTest extends PHPUnit_Framework_TestCase	{
 		$description = "descr";
 		$endDate = 2017;
 		$rate = 4;
-		$status = true;
+		$status = "conception";
 		
 		$object = new ProjectDAO();
 		
