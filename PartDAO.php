@@ -66,59 +66,27 @@ class PartDAO {
 		
 	}
 	
-	public static function updatePriceFromMailInvestor($price,$mail) {
+	public static function updatePart($part) {
 		$db = Database::getInstance();
-		$sql = "UPDATE Part SET price= :price WHERE mail=:mail";
+		$sql = "UPDATE Part SET price=:price, mail=:mail, date=:date WHERE idPart =:idPart";
 		$stmt = $db->prepare($sql);
 		$stmt->execute(array(
-			':price'=>$price,
-			':mail'=>$mail
+			':mail'=>$part->getMailInvestor(),
+			':idPart'=>$part->getIdPart(),
+			':price'=>$part->getPrice(),
+			':date'=>$part->getDate()
 		));
-		$count = $stmt->rowCount();
-		return $count;
+		return $part;
+		
 	}
 	
-	public static function updatePriceFromIdPart($price,$id) {
+	public function deletePart($part) {
 		$db = Database::getInstance();
-		$sql = "UPDATE Part SET price= :price WHERE idPart=:id";
+		$sql = "DELETE FROM WHERE idPart =:idPart";
 		$stmt = $db->prepare($sql);
-		$stmt->execute(array(
-			':price'=>$price,
-			':id'=>$id
-		));
+		$stmt->execute(array(':idPart'=>$part->getIdPart()));
 		$count = $stmt->rowCount();
 		return $count;
 	}
-	
-	public static function deletePartFromIdPart($id) {
-		$db = Database::getInstance();
-		$sql = "DELETE FROM Part WHERE idPart=:id";
-		$stmt = $db->prepare($sql);
-		$stmt->execute(array(':id'=>$id));
-		$count = $stmt->rowCount();
-		return $count;
-		//return le nb de ligne que tu as delete
-	}
-	
-	public static function deletePartFromMailInvestor($mail) {
-		$db = Database::getInstance();
-    $sql = "DELETE FROM Part WHERE mail=:mail";
-		$stmt = $db->prepare($sql);
-		$stmt->execute(array(':mail'=>$mail));
-		$count = $stmt->rowCount();
-		return $count;
-		//return le nb de ligne que tu as delete
-	}
-	
-	public static function deletePartFromIdProject($id) {
-		$db = Database::getInstance();
-    $sql = "DELETE FROM Part WHERE idProject=:id";
-		$stmt = $db->prepare($sql);
-		$stmt->execute(array(':id'=>$id));
-		$count = $stmt->rowCount();
-		return $count;
-		//return le nb de ligne que tu as delete
-	}
-	
 	
 }

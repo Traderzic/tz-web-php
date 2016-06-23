@@ -67,12 +67,5 @@ class PartClass {
   }
   
 }
-/*$part = new PartClass(2,"zozo@blabla.fr",3,120,"2016-10-05");
-echo $part;
-$part->setMailInvestor("ozozoz");
-echo $part;*/
-
-PartDAO::getListPart();
-PartDAO::getPartFromMailInvestor("zozo@hotmail.fr");
 
 ?>
