@@ -37,7 +37,17 @@ class ProjectDAOTest extends PHPUnit_Framework_TestCase	{
 		$before = count($object::getList());
 		$test = $object::create($project);
 		
-		$this->assertGreaterThan($before,$test);
+		$after = count($object::getList());
+		
+		$this->assertEquals($before+1,$after);
+		
+		$newProject = $object::getFromId($test);
+		$this->assertEquals($project,$newProject);
+		$this->assertEquals($project->getStats(),$newProject->getStats());
+		$this->assertEquals($project->getDescription(),$newProject->getDescription());
+		$this->assertEquals($project->getName(),$newProject->getName());
+		
+		
 	}
 	
 
