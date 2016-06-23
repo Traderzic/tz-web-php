@@ -1,14 +1,24 @@
 <?php
 include "ProjectDAO.php";
+<<<<<<< HEAD
  class ProjectClass /*extends Model*/ {
 	
 	protected $name,$startDate,$description,$endDate,$rate,$Status,$classe;
 
 	function __construct ($name,$startDate,$description,$endDate,$rate,$stats,$classe){
+=======
+class abstract ProjectClass /*extends Model*/ {
+	
+	private $mail,$name,$startDate,$description,$endDate,$stats,$classe,$support,$type,$day,$location;
+
+	function __construct ($mail,$name,$startDate,$description,$endDate,$stats,$classe,$support,$type,$day,$location){
+		$this->mail=$mail;
+>>>>>>> 3df5893aa061f86303ad1e2910e56f886152aa5a
 		$this->name=$name;
 		$this->startDate=$startDate;
 		$this->description=$description;
 		$this->endDate=$endDate;
+<<<<<<< HEAD
 		$this->rate=$rate;
 		$this->stats=$stats;
 		$this->classe=$classe;
@@ -24,6 +34,21 @@ include "ProjectDAO.php";
 		print "<tr><td>classe</td><td>".$this->classe."</td></tr>";
 		return "</table>";;
   }
+=======
+		$this->stats=$stats;
+		$this->classe=$classe;
+		$this->support=$support;
+		$this->type=$type;
+		$this->day=$day;
+		$this->location=$location;
+	}
+	public function getMail(){
+		return $this->mail;
+	}
+	public function setMail($new){
+		$this->mail=$new;
+	}
+>>>>>>> 3df5893aa061f86303ad1e2910e56f886152aa5a
 	public function getName(){
 		return $this->name;
 	}
@@ -48,6 +73,7 @@ include "ProjectDAO.php";
 	public function setEndDate($new){
 		$this->endDate=$new;
 	}
+<<<<<<< HEAD
 	public function getRate(){
 		return $this->rate;
 	}
@@ -56,6 +82,10 @@ include "ProjectDAO.php";
 	}
 	public function getStats(){
 		return $this->stats;
+=======
+	public function getStatus(){
+		return $this->status;
+>>>>>>> 3df5893aa061f86303ad1e2910e56f886152aa5a
 	}
 	public function setStats($new){
 		$this->stats=$new;
@@ -65,6 +95,30 @@ include "ProjectDAO.php";
 	}
 	public function setClasse($new){
 		$this->classe=$new;
+	}
+	public function getSupport(){
+		return $this->support;
+	}
+	public function setSupport($new){
+		$this->support=$new;
+	}
+	public function getType(){
+		return $this->type;
+	}
+	public function setType($new){
+		$this->type=$new;
+	}
+	public function getDay(){
+		return $this->day;
+	}
+	public function setDay($new){
+		$this->day=$new;
+	}
+	public function getLocation(){
+		return $this->location;
+	}
+	public function setLocation($new){
+		$this->location=$new;
 	}
 }
 
