@@ -37,14 +37,10 @@ class SurferTest extends PHPUnit_Framework_TestCase{
 	}
 
 	public function test_deleteSurfer(){ // We test if the deletion returns the deleted surfer and if it has the same attribute and then we check if the result is empty when use getSurferFromMail
-		$result = DAOsurfer::deleteSurfer($surfer);
-		$this->assertEquals($this->email, $result->getMail());
-		$this->assertEquals($this->pseudo, $result->getPseudo());
-		$this->assertEquals($this->name, $result->getName());
-		$this->assertEquals($this->firstname, $result->getFirstname());
-		$this->assertEquals($this->password, $result->getPassword());
+		$result = DAOsurfer::deleteSurfer($this->email);
+		$this->assertEquals($result, true);
 		$verification = DAOsurfer::getFromMail($this->email);
-		$this->assertEmpty($verification);
+		$this->assertNull($verification);
 	}
 	
 	public function test_getSurferList(){ // We insert a fixed number of surfer then we test if this number is the same as the number of results

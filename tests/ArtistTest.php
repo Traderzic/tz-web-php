@@ -46,9 +46,10 @@ class ArtistTest extends PHPUnit_Framework_TestCase{
 	}
 
 	public function test_deleteArtist(){ // We test when we select the deleted investor if the result is empty when we use getInvestorFromMail
-		DAOartist::deleteArtist($artist);
+		$result = DAOartist::deleteArtist($artist);
+		$this->assertEquals($result, true);
 		$verification = DAOartist::getFromMail($this->email);
-		$this->assertEmpty($verification);
+		$this->assertNull($verification);
 	}
 	
 	public function test_getArtistList(){ // We insert a fixed number of artist then we test if this number is the same as the number of results
