@@ -2,8 +2,8 @@
 
 class MediaProjectDAO extends ProjectDAO{
   
-  public static function create($projet,$support,$type,$classe){
-    $sql = "INSERT INTO MediaProject(name,status,startDate,description,endDate,classe,support,type,mail) values(:name,:status,:startDate,:description,:endDate,:classe,:support,:type,:mail)";
+  public static function create($projet,$support,$type){
+    $sql = "INSERT INTO Project(name,status,startDate,description,endDate,classe,support,type,mail) values(:name,:status,:startDate,:description,:endDate,'mediaProject',:support,:type,:mail)";
 		$db=Database::getInstance(); // Recupere la base de données.
 		$stmt = $db->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Project");
