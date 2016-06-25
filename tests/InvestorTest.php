@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 // We consider you have already tested SurferTest
 
-class ArtistTest extends PHPUnit_Framework_TestCase{
+class InvestorTest extends PHPUnit_Framework_TestCase{
 	
 	var $db;
 	var $email = "alex@gmail.com"; // cannot use mail(already a function)

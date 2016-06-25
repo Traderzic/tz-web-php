@@ -1,7 +1,7 @@
 <?php
 //nicolas@karageusian.com
-require_once 'PartClass.php';
-require_once 'PartDAO.php';
+require_once './models/PartClass.php';
+require_once './models/PartDAO.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -43,5 +43,4 @@ class TestPart extends PHPUnit_Framework_TestCase {
     $this->assertEquals(1,$count);
   }
   
-  
-?>
+ }

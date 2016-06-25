@@ -23,16 +23,22 @@ class ProjectDAOTest extends PHPUnit_Framework_TestCase	{
 	}
 	
 	public function testCreateProject()	{
-		$name = "simon";
-		$startDate = 2014;
-		$description = "descr";
-		$endDate = 2017;
-		$rate = null;
-		$status = "conception";
+		$this->mail=$mail;
+		$this->name=$name;
+		$this->startDate=$startDate;
+		$this->description=$description;
+		$this->endDate=$endDate;
+		$this->rate=null;
+		$this->stats=$stats;
+		$this->classe=$classe;
+		$this->support=$support;
+		$this->type=$type;
+		$this->day=$day;
+		$this->location=$location;
 		
 		$object = new ProjectDAO();
 		
-		$project = new Project($name,$startDate,$description,$endDate,$rate,$status);
+		$project = $object = new ProjectClass($this->mail,$this->name,$this->startDate,$this->description,$this->endDate,$this->rate,$this->stats,$this->classe,$this->support,$this->type,$this->day,$this->location);
 		
 		$before = count($object::getList());
 		$test = $object::create($project);

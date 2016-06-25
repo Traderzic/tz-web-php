@@ -1,5 +1,4 @@
 <?php
-include 'PartDAO.php';
  
 class PartClass {
   private $idPart;
