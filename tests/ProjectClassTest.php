@@ -7,9 +7,9 @@ use PHPUnit\Framework\TestCase;
 class ProjectClassTest extends PHPUnit_Framework_TestCase	{
 	
 	public $name = "simon";
-	public $startDate = 2016;
+	public $startDate = '2016-12-12';
 	public $description = "descr";
-	public $endDate = 2015;
+	public $endDate = '2015-12-12';
 	public $rate = 4;
 	public $status = true;
 
@@ -24,7 +24,7 @@ class ProjectClassTest extends PHPUnit_Framework_TestCase	{
 	
 	public function testSetStartDate()	{
 		$object = new ProjectClass($this->name,$this->startDate,$this->description,$this->endDate,$this->rate,$this->status);
-		$n = 2016;
+		$n = '2016-12-12';
     	$object::setStartDate($n);
 		$new = $object::getStartDate();
 		$this->assertNotNull($new);
@@ -62,12 +62,10 @@ class ProjectClassTest extends PHPUnit_Framework_TestCase	{
 	
 	public function testSetStatus()	{
 		$object = new ProjectClass($this->name,$this->startDate,$this->description,$this->endDate,$this->rate,$this->status);     
-		$n = true;	
+		$n = 'conception';	
     	$object::setStatus($n);
 		$new = $object::getStatus();
 		$this->assertNotNull($new);
-		$this->assertTrue(is_bool($new));
-		
 	}
 		
 }
