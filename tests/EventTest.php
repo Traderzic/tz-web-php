@@ -19,14 +19,14 @@ class EventTest extends PHPUnit_Framework_TestCase	{
 
 	
 	public function testSetLocation()	{
-		$object = new ProjectClass($this->name,$this->startDate,$this->description,$this->endDate,$this->rate,$this->status);
+		$object = new Event($this->name,$this->startDate,$this->description,$this->endDate,$this->rate,$this->status);
     	$object::setName($location);
 		$new = $object::getName();
 		$this->assertNotNull($new);	//Le nom entré ne peut être nul
 	}
 	
 	public function testSetDay()	{
-		$object = new ProjectClass($this->name,$this->startDate,$this->description,$this->endDate,$this->rate,$this->status);
+		$object = new Event($this->name,$this->startDate,$this->description,$this->endDate,$this->rate,$this->status);
     	$object::setStartDate($day);
 		$new = $object::getStartDate();
 		$this->assertNotNull($new);
