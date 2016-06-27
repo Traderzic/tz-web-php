@@ -24,7 +24,7 @@ class SurferTest extends PHPUnit_Framework_TestCase{
 	public function test_insertSurfer(){ // We insert a surfer and we test if the return is the same mail that we used to insert 
 		$this->surfer = new Surfer($this->params['mail'], $this->params['pseudo'], $this->params['name'], $this->params['firstname'], $this->params['password']);
 		$resultMail = DAOsurfer::insertSurfer($this->surfer);
-		$this->assertEquals($this->params['mmail'],$resultMail);
+		$this->assertEquals($this->params['mail'],$resultMail);
 	}
 		
 	 public function test_getSurferFromMail(){ // We test if the result is a Surfer object and if its attributes are the same that we used during the insert
