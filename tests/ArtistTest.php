@@ -12,7 +12,7 @@ class ArtistTest extends PHPUnit_Framework_TestCase{
 	
 	var $db;
 	var $params = array(
-    "mail" => "vietmoopy",
+    	"mail" => "vietmoopy",
 	"pseudo" => "vietmoopy",
 	"name" => "nguyen",
 	"firstname" => "alex",
@@ -33,9 +33,9 @@ class ArtistTest extends PHPUnit_Framework_TestCase{
 	}
 	
 	public function test_insertArtist(){ // We insert a surfer first. Then we insert an artist with the same mail and we test if the return is the same mail that we used to insert 
-		$this->surfer = new Surfer($params['mail'], $params['pseudo'], $params['name'], $params['firstname'], $params['password']);
+		$this->surfer = new Surfer($params);
 		DAOsurfer::insertSurfer($surfer);
-		$this->artist = new Artist($params['mail'], $params['description']);
+		$this->artist = new Artist($params);
 		$resultMail = DAOartist::insertArtist($this->artist);
 		$this->assertEquals($this->params['mail'],$resultMail);
 	}
@@ -63,9 +63,9 @@ class ArtistTest extends PHPUnit_Framework_TestCase{
 		$this->db->query($sql);
 		for ($i=1; $i<=5; $i++) {
 			$mailElt = $i.$this->params['mail'];
-			$surferElt = new Surfer($mailElt, $params['pseudo'], $params['name'], $params['firstname'], $params['password']);
+			$surferElt = new Surfer($params);
 			DAOsurfer::insertSurfer($surfer);
-			$artistElt = new Artist($mailElt, $params['description']);
+			$artistElt = new Artist($params);
 			DAOartist::insertArtist($artistElt);
 		}
 		$result = DAOartist::getArtistList();
