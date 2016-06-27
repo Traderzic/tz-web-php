@@ -22,7 +22,7 @@ class SurferTest extends PHPUnit_Framework_TestCase{
 	}
 	
 	public function test_insertSurfer(){ // We insert a surfer and we test if the return is the same mail that we used to insert 
-		$this->surfer = new Surfer($this->params['mail'], $this->params['pseudo'], $this->params['name'], $this->params['firstname'], $this->params['password']);
+		$this->surfer = new Surfer($params);
 		$resultMail = DAOsurfer::insertSurfer($this->surfer);
 		$this->assertEquals($this->params['mail'],$resultMail);
 	}
@@ -47,7 +47,7 @@ class SurferTest extends PHPUnit_Framework_TestCase{
 	public function test_getSurferList(){ // We insert a fixed number of surfer then we test if this number is the same as the number of results
 		for ($i=1; $i<=5; $i++) {
 			$mailElt = $i.$this->params['mail'];
-			$surferElt = new Surfer($mailElt, $this->params['pseudo'], $this->params['name'], $this->params['firstname'], $this->params['password']);
+			$surferElt = new Surfer($params);
 			DAOsurfer::insertSurfer($surferElt);
 		}
 		$result = DAOsurfer::getSurferList();
