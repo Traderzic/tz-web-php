@@ -12,7 +12,7 @@ class InvestorTest extends PHPUnit_Framework_TestCase{
 	
 	var $db;
 	var $params = array(
-    "mail" => "vietmoopy",
+    	"mail" => "vietmoopy",
 	"pseudo" => "vietmoopy",
 	"name" => "nguyen",
 	"firstname" => "alex",
@@ -33,9 +33,9 @@ class InvestorTest extends PHPUnit_Framework_TestCase{
 	}
 	
 	public function test_insertInvestor(){ // We insert a surfer first. Then we insert an investor with the same mail and we test if the return is the same mail that we used to insert 
-		$this->surfer = new Surfer($params['mail'], $params['pseudo'], $params['name'], $params['firstname'], $params['password']);
+		$this->surfer = new Surfer($params);
 		DAOsurfer::insertSurfer($surfer);
-		$this->surfer = new Investor($params['mail'], $params['address']);
+		$this->surfer = new Investor($params);
 		$resultMail = DAOinvestor::insertSurfer($surfer);
 		$this->assertEquals($this->params['mail'],$resultMail);
 	}
@@ -63,17 +63,11 @@ class InvestorTest extends PHPUnit_Framework_TestCase{
 		$this->db->query($sql);
 		for ($i=1; $i<=5; $i++) {
 			$mailElt = $i.$this->params['mail'];
-			$surferElt = new Surfer($mailElt, $params['pseudo'], $params['name'], $params['firstname'], $params['password']);
+			$surferElt = new Surfer($params);
 			DAOsurfer::insertSurfer($surfer);
-			$investorElt = new Investor($mailElt, $params['address']);
+			$investorElt = new Investor($params);
 			DAOinvestor::insertInvestor($investorElt);
 		}
-		$sql = "TRUNCATE TABLE Artist";
-		$this->db->query($sql);
-		$sql = "TRUNCATE TABLE Investor";
-		$this->db->query($sql);
-		$sql = "TRUNCATE TABLE Surfer";
-		$this->db->query($sql);
 		$result = DAOinvestor::getInvestorList();
 		$this->assertCount(5,$result);
 	}
