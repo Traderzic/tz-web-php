@@ -1,27 +1,21 @@
 <?php
-class Artist{
-  private $mail;
+
+include "Surfer.php"
+
+class Artist extends Surfer{
   private $description;
   
-  public function __construct($mail,$description){
-    $this->mail = $mail;
-    $this->description = $description;
+  public function __construct($params){
+    parent::__construct($params);
+    $this->description = $params['description'];
   }
     
   public function getDescription(){
     return $this->description;
   }
-  
-  public function getMail(){
-    return $this->mail;
-  }
  
   public function setDescription($description){
     $this->description=$description;
-  }
-  
-  public function setMail($mail){
-    $this->mail=$mail;
   }
 }
 ?>

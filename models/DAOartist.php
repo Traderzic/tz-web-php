@@ -1,7 +1,8 @@
 <?php
 include_once "DAOsurfer.php";
 include_once "Database.php";
-class DAOartist{
+include "Artist.php";
+class DAOartist extends DAOsurfer{
 
   public static function insertArtist($artist){
     $surfer = DAOsurfer::getSurferFromMail($artist->getMail());
@@ -11,7 +12,7 @@ class DAOartist{
       $stmt = $db->prepare($sql);
       $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
       $stmt->execute(array(
-      ":mail" => $mail,
+      ":mail" => $artist->getMail(),
       ":description" => $artist->getDescription()));
       return $artist->getMail();
     }
@@ -24,8 +25,12 @@ class DAOartist{
     $stmt = $db->prepare($sql);
     $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
     $stmt->execute(array(":mail"=>$mail));
-    $count = $stmt->rowCount();
-		return $count;
+    if (DAOartist::getArtistFromMail($mail)==null){
+			return true;
+		}
+		else{
+			return false;
+		}
   }
  
   public static function updateDescriptionFromMail($mail,$description){                                                                                                  
@@ -35,26 +40,36 @@ class DAOartist{
     $stmt->execute(array(
     ":mail"=>$mail,
     ":description"=>$description));
-    $count = $stmt->rowCount();
-		return $count;
+    if (DAOartist::getArtistFromMail($mail)==null){
+			return false;
+		}
+		else{
+			return true;
+		}
   }
 
   public static function getArtistFromMail($mail){
     $sql = "SELECT * FROM Artist WHERE mail = :mail";
     $db = Database::getInstance();
     $stmt = $db->prepare($sql);
-    $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute(array(":mail" => $mail));
     $res=$stmt->fetch();
-	  $artist=new Artist($res['mail'],$res['description']);
-	  return $artist;
+	  $artist=new Artist($res);
+		if ($artist->getMail()==null){
+			return null;
+		}
+		else
+		{
+			return $artist;
+		}
   }
   
   public static function getArtistList(){
     $sql = "SELECT * FROM Artist";
     $db = Database::getInstance();
     $stmt = $db->query($sql);
-    $stmt->setFetchMode(PDO::FETCH_CLASS, "Artist");
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
     return $stmt->fetchAll();
   }
 }
