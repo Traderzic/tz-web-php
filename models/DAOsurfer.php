@@ -1,5 +1,6 @@
 <?php
 include_once "Database.php";
+include "Surfer.php";
 class DAOsurfer{
 
 	public static function insertSurfer($surfer){
@@ -22,8 +23,12 @@ class DAOsurfer{
 		$stmt = $db->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "Surfer");
 		$stmt->execute(array(":mail"=>$mail));
-		$count = $stmt->rowCount();
-		return $count;
+		if (DAOsurfer::getSurferFromMail($mail)==null){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
  
  	public static function updatePasswordFromMail($mail,$passwrd){                                                                                                  
@@ -33,8 +38,12 @@ class DAOsurfer{
   	$stmt->execute(array(
   	":mail"=>$mail,
  		":passwrd"=>$passwrd));
-		$count = $stmt->rowCount();
-		return $count;
+		if (DAOsurfer::getSurferFromMail($mail)==null){
+			return false;
+		}
+		else{
+			return true;
+		}
  }
 	
 	public static function updatePseudoFromMail($mail,$pseudo){                                                                                                  
@@ -44,8 +53,12 @@ class DAOsurfer{
   	$stmt->execute(array(
   	":mail"=>$mail,
   	":pseudo"=>$pseudo));
-		$count = $stmt->rowCount();
-		return $count;
+		if (DAOsurfer::getSurferFromMail($mail)==null){
+			return false;
+		}
+		else{
+			return true;
+		}
  	}
 
 	public static function updateNameFromMail($mail,$name){                                                                                                  
@@ -55,8 +68,12 @@ class DAOsurfer{
   	$stmt->execute(array(
   	":mail"=>$mail,
   	":name"=>$name));
-		$count = $stmt->rowCount();
-		return $count;
+		if (DAOsurfer::getSurferFromMail($mail)==null){
+			return false;
+		}
+		else{
+			return true;
+		}
  	}
 	
 	public static function updateFirstnameFromMail($mail,$firstname){                                                                                                  
@@ -66,26 +83,36 @@ class DAOsurfer{
   	$stmt->execute(array(
   	":mail"=>$mail,
   	":firstname"=>$firstname));
-		$count = $stmt->rowCount();
-		return $count;
+		if (DAOsurfer::getSurferFromMail($mail)==null){
+			return true;
+		}
+		else{
+			return false;
+		}
  	}
 
 	public static function getSurferFromMail($mail){
   	$sql = "SELECT * FROM Surfer WHERE mail = :mail";
 		$db = Database::getInstance();
-  	$stmt = $db->prepare($sql);
-  	$stmt->setFetchMode(PDO::FETCH_CLASS, "Surfer");
-  	$stmt->execute(array(":mail" => $mail));
-  	$res=$stmt->fetch();
-		$surfer=new Surfer($res['mail'],$res['pseudo'],$res['name'],$res['firstname'],$res['passwrd']);
-		return $surfer;
+    $stmt = $db->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt->execute(array(":mail" => $mail));
+    $res=$stmt->fetch();	
+		$surfer=new Surfer($res);
+		if ($surfer->getMail()==null){
+			return null;
+		}
+		else
+		{
+			return $surfer;
+		}
  	}
 	
  	public static function getSurferList(){
   	$sql = "SELECT * FROM Surfer";
 		$db = Database::getInstance();
   	$stmt = $db->query($sql);
-  	$stmt->setFetchMode(PDO::FETCH_CLASS, "Surfer");
+  	$stmt->setFetchMode(PDO::FETCH_ASSOC);
   	return $stmt->fetchAll();
  	}
 }

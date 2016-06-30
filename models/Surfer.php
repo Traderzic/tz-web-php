@@ -1,21 +1,22 @@
 <?php
+
 class Surfer {
-	private $mail;
+	private $email;
   private $passwrd;
 	private $pseudo;
 	private $name;
 	private $firstname;
   
-  public function __construct($mail,$pseudo,$name,$firstname,$passwrd){
-    $this->mail = $mail;
-    $this->passwrd = $passwrd;
-		$this->pseudo = $pseudo;
-		$this->name = $name;
-		$this->firstname = $firstname;
+  public function __construct($params){
+    $this->email = $params['mail'];
+    $this->passwrd = $params['passwrd'];
+		$this->pseudo = $params['pseudo'];
+		$this->name = $params['name'];
+		$this->firstname = $params['firstname'];
   }
     
   public function getMail(){
-    return $this->mail;
+    return $this->email;
   }
   
   public function getPassword(){
@@ -34,8 +35,8 @@ class Surfer {
     return $this->firstname;
   }
   
-	public function setMail($mail){                                                                                                  
-    $this->mail=$mail;
+	public function setMail($email){                                                                                                  
+    $this->email=$email;
 	}
   
   public function setPassword($passwrd){

@@ -1,7 +1,8 @@
 <?php
 include_once "DAOsurfer.php";
 include_once "Database.php";
-class DAOinvestor{
+include "Investor.php";
+class DAOinvestor extends DAOsurfer{
  
   public static function insertInvestor($investor){
     $surfer = DAOsurfer::getSurferFromMail($investor->getMail());
@@ -11,7 +12,7 @@ class DAOinvestor{
       $stmt = $db->prepare($sql);
       $stmt->setFetchMode(PDO::FETCH_CLASS, "Investor");
       $stmt->execute(array(
-      ":mail" => $mail,
+      ":mail" => $investor->getMail(),
       ":address" => $investor->getAddress()));
       return $investor->getMail();
     }
@@ -24,8 +25,12 @@ class DAOinvestor{
     $stmt = $db->prepare($sql);
     $stmt->setFetchMode(PDO::FETCH_CLASS, "Investor");
     $stmt->execute(array(":mail"=>$mail));
-    $count = $stmt->rowCount();
-		return $count;
+    if (DAOinvestor::getInvestorFromMail($mail)==null){
+			return true;
+		}
+		else{
+			return false;
+		}
   }
  
   public static function updateAddressFromMail($mail,$address){                                                                                                  
@@ -34,27 +39,37 @@ class DAOinvestor{
     $stmt = $db->prepare($sql);
     $stmt->execute(array(
     ":mail"=>$mail,
-    ":description"=>$description));
-    $count = $stmt->rowCount();
-		return $count;
+    ":address"=>$address));
+    if (DAOinvestor::getInvestorFromMail($mail)==null){
+			return false;
+		}
+		else{
+			return true;
+		}
   }
 
   public static function getInvestorFromMail($mail){
     $sql = "SELECT * FROM Investor WHERE mail = :mail";
     $db = Database::getInstance();
     $stmt = $db->prepare($sql);
-    $stmt->setFetchMode(PDO::FETCH_CLASS, "Investor");
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute(array(":mail" => $mail));
     $res=$stmt->fetch();
-	  $investor=new Investor($res['mail'],$res['address']);
-	  return $investor;
+	  $investor=new Investor($res);
+	  if ($investor->getMail()==null){
+			return null;
+		}
+		else
+		{
+			return $investor;
+		}
   }
   
   public static function getInvestorList(){
     $sql = "SELECT * FROM Investor";
     $db = Database::getInstance();
     $stmt = $db->query($sql);
-    $stmt->setFetchMode(PDO::FETCH_CLASS, "Investor");
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
     return $stmt->fetchAll();
   }
 }
